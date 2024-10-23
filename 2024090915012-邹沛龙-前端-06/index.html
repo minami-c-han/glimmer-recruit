@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <div id="area">
+        <img src="./img/EDG.png" alt="EDG" class="EDG">
+        <img src="./img/FPX.png" alt="FPX" class="FPX">
+        <img src="./img/TE.png" alt="TE" class="TE">
+        <img src="./img/BLG.png" alt="BLG" class="BLG">
+    </div>
+    <div id="bottom">
+        <input type="button" value="开始支持投票" style="display: block;margin: auto; margin-top: 30px;height: 30px;">
+    </div>
+    <div>
+        <p id="winner" style="color:white ; font-size:50px; margin-bottom: 10px; display: inline-block; text-align: center; align-content: center;">winner</p>
+    </div>
+    <script>
+        let hidewinner = $('#winner');
+        hidewinner.hide();
+ function px(){ //px=排序
+            let $pxqzd = $('#area img'); //排序前战队
+            let pxhzd = $pxqzd.sort(function(zd1,zd2){
+            let ps1 = zd1.attributes.length;
+            let ps2 = zd2.attributes.length;
+            return ps2 - ps1;
+            });
+            $('#area').empty(); 
+            pxhzd.each(function(){
+                       $('#area').append($(this).clone());
+            });}
+            let bottom =$('#bottom input')
+            bottom.click(function() {
+                $('#area img:nth-child(odd)').attr('ps1','1')
+            px($('#area img'));
+            $('#area img:nth-last-child(3)').attr('ps2','2')
+            px($('#area img'));
+            $('#area .BLG').attr('ps3','3')
+            px($('#area img'));
+            $('#area img:first-child').attr('ps4','4')
+            px($('#area img'));
+            $('img').each(function(index) {
+            let n = this.attributes.length; 
+            $(this).css('margin-left', (n-3) * 100 + 'px'); 
+            let top = $('#area img:first-child').attr('class')
+            let winner =$('#winner')
+            winner.text(top)
+            hidewinner.show(5000)
+       });
+    })
+    </script>
+</body>
+</html>
